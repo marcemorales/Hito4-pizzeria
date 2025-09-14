@@ -1,4 +1,4 @@
-# Hito 5: Pizzería Mamma Mía (Proyecto con **React Router I**)
+# Hito 4 y 5: Pizzería Mamma Mía (Proyecto con **React Router I**)
 
 Este proyecto corresponde al **Hito 5** del curso, donde se implementa el sistema de **enrutamiento con React Router**.
 
