@@ -9,10 +9,11 @@ export default function Pizza() {
     const id = "p001"; // fijo para Hito 4
     (async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/pizzas/${id}`);
+        const res = await fetch("/pizzas.json");
         if (!res.ok) throw new Error("No se pudo cargar la pizza");
         const data = await res.json();
-        setPizza(data);
+        const list = Array.isArray(data) ? data : [];
+        setPizza(list.find(x => x.id === id) || null);
       } catch (e) {
         setErr(e.message);
       } finally {

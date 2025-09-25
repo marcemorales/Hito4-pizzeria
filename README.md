@@ -1,30 +1,53 @@
-# Hito 4 y 5: Pizzería Mamma Mía (Proyecto con **React Router I**)
 
-Este proyecto corresponde al **Hito 5** del curso, donde se implementa el sistema de **enrutamiento con React Router**.
+# 🍕 Pizzería Mamma Mía — Hito 6
 
-## 🚀 Requerimientos:
+Proyecto desarrollado en **React + Vite** para el curso, donde se implementa **manejo de estado global con Context API**.  
+En este hito se integró un **carrito de compras global**, accesible desde cualquier parte de la aplicación.
 
-1. Instalación y configuración de **React Router** (`BrowserRouter` en `main.jsx`).
-2. Componentes principales organizados en la carpeta `pages/`:
-   - Home
-   - Register
-   - Login
-   - Cart
-   - Pizza
-   - Profile
-   - NotFound
-3. Rutas configuradas en `App.jsx`:
-   - `/` → **Home**
-   - `/register` → **Register**
-   - `/login` → **Login**
-   - `/cart` → **Cart**
-   - `/pizza/p001` → **Pizza**
-   - `/profile` → **Profile**
-   - `/404` → **NotFound**
-   - `*` → redirige a `/404`
-4. Página **NotFound** personalizada con enlace de regreso a `/`.
-5. Página **Profile** que muestra un email estático y un botón de cerrar sesión.
-6. **Navbar** con enlaces de navegación a las rutas (excepto `/pizza/p001`) y botón 🛒 que lleva a `/cart`.
+---
 
-----
-Marcela Morales Peralta
+## 🚀 Tecnologías utilizadas
+- [React 18](https://react.dev/)  
+- [Vite](https://vitejs.dev/)  
+- [React Router DOM v6](https://reactrouter.com/)  
+- Context API (estado global)  
+- CSS simple (sin frameworks externos)
+
+---
+
+## 📦 Instalación y ejecución
+Clona el repositorio e instala dependencias:
+
+```bash
+npm install
+npm run dev
+```
+
+La aplicación quedará disponible en [http://localhost:5173](http://localhost:5173).
+
+---
+
+## ✅ Requerimientos del Hito 6
+
+1. **Context para carrito de compras**  
+   - Implementado en `CartContext.jsx` con `useReducer`.
+
+2. **Navbar consume el contexto**  
+   - Muestra el **total del carrito** en tiempo real.
+
+3. **Home añade productos al carrito**  
+   - Cada card de pizza tiene un botón **Añadir**.
+
+4. **Página Cart**  
+   - Lista productos agregados.  
+   - Permite **sumar/restar**, **eliminar** y **vaciar carrito**.
+
+5. **Total consistente**  
+   - El total mostrado en el **Navbar** coincide con el de **Cart**.
+
+6. **(Opcional)** Context para pizzas  
+   - Por ahora se cargan desde `public/pizzas.json`.
+
+
+---
+Marcela Morales Peralta 

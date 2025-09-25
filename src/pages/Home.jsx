@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import CardPizza from "../components/CardPizza.jsx";
 
-export default function Home({ onAdd }) {
+import { useCart } from "../context/CartContext.jsx";
+
+export default function Home() {
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+  const { add } = useCart();
 
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/pizzas");
+        const res = await fetch("/pizzas.json");
         if (!res.ok) throw new Error("Error al cargar pizzas");
         const data = await res.json();
         if (alive) setPizzas(data);
@@ -34,11 +37,7 @@ export default function Home({ onAdd }) {
       </section>
       <section className="grid">
         {pizzas.map(p => (
-          <CardPizza
-            key={p.id}
-            pizza={p}
-            onAdd={() => onAdd?.(p)}
-          />
+          <CardPizza key={p.id} pizza={p} onAdd={() => add(p)} />
         ))}
       </section>
     </main>

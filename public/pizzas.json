@@ -1,0 +1,37 @@
+[
+  {
+    "id": "p001",
+    "name": "Margarita",
+    "price": 6500,
+    "img": "https://images.unsplash.com/photo-1548365328-9f547fb09530?q=80&w=1200&auto=format&fit=crop",
+    "ingredients": [
+      "tomate",
+      "mozzarella",
+      "albahaca"
+    ],
+    "desc": "Clásica italiana con tomate, mozzarella y hojas de albahaca fresca."
+  },
+  {
+    "id": "p002",
+    "name": "Pepperoni",
+    "price": 7200,
+    "img": "https://images.unsplash.com/photo-1604068549290-de188494b542?q=80&w=1200&auto=format&fit=crop",
+    "ingredients": [
+      "mozzarella",
+      "pepperoni"
+    ],
+    "desc": "Queso fundido y generosas láminas de pepperoni crujiente."
+  },
+  {
+    "id": "p003",
+    "name": "Hawaiana",
+    "price": 7000,
+    "img": "https://images.unsplash.com/photo-1601924582971-b0c5beed88a9?q=80&w=1200&auto=format&fit=crop",
+    "ingredients": [
+      "jamón",
+      "piña",
+      "mozzarella"
+    ],
+    "desc": "Dulce y salada, con jamón y piña dorada."
+  }
+]
