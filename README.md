@@ -1,5 +1,5 @@
 
-# 🍕 Pizzería Mamma Mía — Hito 6
+# 🍕 Hito 6: Pizzería Mamma Mía
 
 Proyecto desarrollado en **React + Vite** para el curso, donde se implementa **manejo de estado global con Context API**.  
 En este hito se integró un **carrito de compras global**, accesible desde cualquier parte de la aplicación.
