@@ -1,5 +1,7 @@
+
 import { Routes, Route } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
+import { CartProvider } from "./context/CartContext";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
@@ -13,36 +15,38 @@ import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 export default function App() {
   return (
     <UserProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/pizza/:id" element={<Pizza />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicOnlyRoute>
-              <Login />
-            </PublicOnlyRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicOnlyRoute>
-              <Register />
-            </PublicOnlyRoute>
-          }
-        />
-      </Routes>
+      <CartProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pizza/:id" element={<Pizza />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicOnlyRoute>
+                <Login />
+              </PublicOnlyRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <PublicOnlyRoute>
+                <Register />
+              </PublicOnlyRoute>
+            }
+          />
+        </Routes>
+      </CartProvider>
     </UserProvider>
   );
 }

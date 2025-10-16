@@ -1,8 +1,8 @@
+
 import { createContext, useContext, useMemo, useReducer } from "react";
 
 // Item shape: { id, name, price, img, ingredients, qty }
-const CartStateContext = createContext(undefined);
-const CartDispatchContext = createContext(undefined);
+const CartContext = createContext(null);
 
 function cartReducer(state, action) {
   switch (action.type) {
@@ -14,17 +14,21 @@ function cartReducer(state, action) {
         : [...state.items, { ...p, qty: 1 }];
       return { ...state, items };
     }
-    case "REMOVE_ONE": {
+    case "INC": {
       const id = action.payload;
-      const items = state.items
-        .map(i => i.id === id ? { ...i, qty: i.qty - 1 } : i)
-        .filter(i => i.qty > 0);
-      return { ...state, items };
+      return { ...state, items: state.items.map(i => i.id === id ? { ...i, qty: i.qty + 1 } : i) };
     }
-    case "REMOVE_ALL": {
+    case "DEC": {
       const id = action.payload;
-      const items = state.items.filter(i => i.id != id);
-      return { ...state, items };
+      return { ...state, items: state.items.flatMap(i => {
+        if (i.id !== id) return [i];
+        const nextQty = i.qty - 1;
+        return nextQty <= 0 ? [] : [{ ...i, qty: nextQty }];
+      }) };
+    }
+    case "REMOVE": {
+      const id = action.payload;
+      return { ...state, items: state.items.filter(i => i.id !== id) };
     }
     case "CLEAR":
       return { ...state, items: [] };
@@ -37,30 +41,27 @@ const initialState = { items: [] };
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-
-  const total = useMemo(
-    () => state.items.reduce((sum, i) => sum + (i.price ?? 0) * (i.qty ?? 0), 0),
-    [state.items]
-  );
+  const total = state.items.reduce((acc, i) => acc + i.price * i.qty, 0);
 
   const value = useMemo(() => ({
     items: state.items,
     total,
     add: (p) => dispatch({ type: "ADD", payload: p }),
-    removeOne: (id) => dispatch({ type: "REMOVE_ONE", payload: id }),
-    removeAll: (id) => dispatch({ type: "REMOVE_ALL", payload: id }),
+    inc: (id) => dispatch({ type: "INC", payload: id }),
+    dec: (id) => dispatch({ type: "DEC", payload: id }),
+    remove: (id) => dispatch({ type: "REMOVE", payload: id }),
     clear: () => dispatch({ type: "CLEAR" }),
   }), [state.items, total]);
 
   return (
-    <CartStateContext.Provider value={value}>
+    <CartContext.Provider value={value}>
       {children}
-    </CartStateContext.Provider>
+    </CartContext.Provider>
   );
 }
 
 export function useCart() {
-  const ctx = useContext(CartStateContext);
+  const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart debe usarse dentro de <CartProvider>");
   return ctx;
 }
